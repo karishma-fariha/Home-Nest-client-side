@@ -17,17 +17,17 @@ const Navbar = () => {
                         tabIndex="-1"
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <NavLink to='/'>Home</NavLink>
-                        <NavLink to='/'>All Properties</NavLink>
-                        <NavLink to='/'>Add Properties</NavLink>
-                        <NavLink to='/'>My Properties</NavLink>
-                        <NavLink to='/'>My Ratings</NavLink>
+                        <NavLink to='/allProperties'>All Properties</NavLink>
+                        <NavLink to='/addProperties'>Add Properties</NavLink>
+                        <NavLink to='/myProperties'>My Properties</NavLink>
+                        <NavLink to='/myRatings'>My Ratings</NavLink>
                     </ul>
                 </div>
                 <div className="flex items-center justify-center gap-1">
-                   
-                            <img
-                            className='w-10 h-10' 
-                            src={home} alt="" />
+
+                    <img
+                        className='w-10 h-10'
+                        src={home} alt="" />
 
                     <a className=" text-2xl font-bold ">
                         Home<span className='text-primary'>Nest</span></a>
@@ -36,13 +36,13 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="hidden navbar-center lg:flex gap-5">
-                <ul className="">
-                    <NavLink to='/'>Home</NavLink>
-                    <NavLink to='/'>All Properties</NavLink>
-                    <NavLink to='/'>Add Properties</NavLink>
-                    <NavLink to='/'>My Properties</NavLink>
-                    <NavLink to='/'>My Ratings</NavLink>
-                </ul>
+
+                <NavLink to='/'>Home</NavLink>
+                <NavLink to='/allProperties'>All Properties</NavLink>
+                <NavLink to='/addProperties'>Add Properties</NavLink>
+                <NavLink to='/myProperties'>My Properties</NavLink>
+                <NavLink to='/myRatings'>My Ratings</NavLink>
+
             </div>
             <div className="navbar-end gap-4">
                 <a className="btn btn-primary">Login</a>
