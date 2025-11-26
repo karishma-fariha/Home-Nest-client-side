@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthContext';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -48,7 +49,7 @@ const Login = () => {
                 const errorCode = error.code;
                 // const errorMessage = error.message;
                 setError(errorCode)
-                // toast(errorCode)
+                toast(errorCode)
             });
     }
 

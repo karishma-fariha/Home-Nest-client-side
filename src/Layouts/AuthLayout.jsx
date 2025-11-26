@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../Components/Navbar';
 import { Outlet } from 'react-router';
+import { ToastContainer } from 'react-toastify';
 
 const AuthLayout = () => {
     return (
@@ -9,6 +10,8 @@ const AuthLayout = () => {
             <main>
                 <Outlet></Outlet>
             </main>
+
+            <ToastContainer />
             
         </div>
     );

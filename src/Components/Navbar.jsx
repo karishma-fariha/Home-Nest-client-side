@@ -5,6 +5,7 @@ import { ImHome } from 'react-icons/im';
 import home from '../assets/icons8-home-64.png';
 import { AuthContext } from '../Provider/AuthContext';
 import userImg from '../assets/user.png';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
     const { user, logout } = use(AuthContext);
@@ -14,11 +15,10 @@ const Navbar = () => {
     const handleLogout = () => {
         // console.log('logout')
         logout().then(() => {
-            // toast('You Logout Successfully..');
-            // Sign-out successful.
+            toast('You Logout Successfully..');
         }).catch((error) => {
             alert(error)
-            // toast(error);
+            toast(error);
             // An error happened.
         });;
     }
