@@ -11,7 +11,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 const BannerSlider = () => {
     return (
-        <div className='mb-20'>
+        <div className=''>
             <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 navigation
