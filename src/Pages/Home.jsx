@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import BannerSlider from '../Components/BannerSlider';
 import FeaturedEstates from '../Components/FeaturedEstates';
+import WhyChoose from '../Components/WhyChoose';
+import HowItWork from '../Components/HowItWork';
 
 const Home = () => {
     const [estates, setEstates] = useState([]);
@@ -21,6 +23,12 @@ const Home = () => {
              <section className='p-10'>
                 <h1 className="text-center text-5xl font-bold mb-6 text-primary">Featured Real Estate</h1>
                 <FeaturedEstates estates={estates}></FeaturedEstates>
+             </section>
+             <section>
+                <WhyChoose></WhyChoose>
+             </section>
+             <section>
+                <HowItWork></HowItWork>
              </section>
         </div>
     );

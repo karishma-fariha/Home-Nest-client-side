@@ -19,11 +19,11 @@ const EstateCard = ({estate}) => {
 
       <p className="text-gray-600 mt-1">{short_description}</p>
 
-      <span className="badge badge-primary mt-2">{category}</span>
+      <span className="badge badge-secondary mt-2">{category}</span>
 
       <Link 
         to={`/details/${id}`} 
-        className="btn btn-primary mt-4"
+        className="btn btn-primary mt-4 hover:btn-secondary"
       >
         View Details
       </Link>
