@@ -9,6 +9,7 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import Error from "../Pages/Error";
+import PrivateRouter from "../Provider/PrivateRouter";
 
 const router = createBrowserRouter(
     [
@@ -26,11 +27,15 @@ const router = createBrowserRouter(
                 },
                 {
                     path: '/addProperties',
-                    element: <AddProperties></AddProperties>
+                    element: <PrivateRouter>
+                        <AddProperties></AddProperties>
+                    </PrivateRouter>
                 },
                 {
                     path: '/myProperties',
-                    element: <MyProperties></MyProperties>
+                    element: <PrivateRouter>
+                        <MyProperties></MyProperties>
+                    </PrivateRouter>
                 },
                 {
                     path: '/myRatings',
@@ -41,10 +46,10 @@ const router = createBrowserRouter(
             ]
         },
         {
-            path:'/auth',
-            element:<AuthLayout></AuthLayout>,
-            children:[
-                 {
+            path: '/auth',
+            element: <AuthLayout></AuthLayout>,
+            children: [
+                {
                     path: "/auth/login",
                     element: <Login></Login>
                 },
@@ -52,7 +57,7 @@ const router = createBrowserRouter(
                     path: "/auth/register",
                     element: <Register></Register>
                 },
-                
+
             ]
         },
         {

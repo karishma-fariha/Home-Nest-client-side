@@ -8,7 +8,7 @@ import CityHighlights from '../Components/CityHighlights';
 const Home = () => {
     const [estates, setEstates] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:3000/properties")
+        fetch(`http://localhost:3000/properties/home`)
             .then(res => res.json())
             .then(data => setEstates(data))
             .catch(err => {
