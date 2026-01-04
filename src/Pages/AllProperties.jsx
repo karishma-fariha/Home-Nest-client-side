@@ -1,53 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import AllProperty from '../Components/AllProperty';
-import { Link } from 'react-router';
+import { LayoutGrid } from 'lucide-react';
+import Loading from './Loading';
 
 const AllProperties = () => {
-    const [search, setSearch] = useState('');
     const [estates, setEstates] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         fetch(`https://home-nest-server-side.vercel.app/properties`)
             .then(res => res.json())
-            .then(data => setEstates(data))
-            .catch(err => {
-                console.log(err);
+            .then(data => {
+                setEstates(data);
+                setLoading(false);
             })
+            .catch(err => {
+                console.error(err);
+                setLoading(false);
+            });
     }, []);
-    const filteredEstates = estates.filter((estate) =>
-        estate.title?.toLowerCase().includes(search.toLowerCase())
-    )
+
     return (
-        <div className='mb-20'>
-            <h1 className='text-5xl font-bold text-primary text-center p-3'>Our All Properties</h1>
-            <p className='text-xl text-gray-400 text-center mb-8'>Explore every listing — find your perfect home, investment, or commercial space</p>
-            <div className="flex justify-between items-center mx-20">
-                <h1 className='text-xl font-bold'>Total Properties({filteredEstates.length})</h1>
-                <label className="input">
-                    <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <g
-                            strokeLinejoin="round"
-                            strokeLinecap="round"
-                            strokeWidth="2.5"
-                            fill="none"
-                            stroke="currentColor"
-                        >
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.3-4.3"></path>
-                        </g>
-                    </svg>
-                    <input type="search"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        required
-                        placeholder="Search by Property Name" />
-                </label>
+        <div className='min-h-screen bg-base-100 pt-10 pb-20'>
+            <div className="container mx-auto px-6">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4 border-b border-base-300 pb-6">
+                    <div>
+                        <div className="flex items-center gap-2 text-primary font-bold uppercase tracking-widest text-sm mb-2">
+                            <LayoutGrid size={16} />
+                            <span>Inventory</span>
+                        </div>
+                        <h1 className='text-4xl font-black text-base-content'>Property Explorer</h1>
+                    </div>
+                    <p className='text-base-content/60 max-w-md md:text-right'>
+                        Browse through our verified collection of residential and commercial properties across Dhaka.
+                    </p>
+                </div>
 
-
-            </div>
-
-            <AllProperty estates={filteredEstates}></AllProperty>
-            <div className="flex items-center justify-center">
-                <Link to='/' className='btn btn-primary px-10'>Back to Home</Link>
+                {loading ? (
+                    <Loading></Loading>
+                ) : (
+                    <AllProperty estates={estates} />
+                )}
             </div>
         </div>
     );

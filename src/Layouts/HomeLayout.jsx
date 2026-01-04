@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 const HomeLayout = () => {
     return (
         <div>
-            <header>
+            <header className='sticky top-0 z-50'>
                 <Navbar></Navbar>
             </header>
             <main>
@@ -16,7 +16,7 @@ const HomeLayout = () => {
             <footer>
                 <Footer></Footer>
             </footer>
-            <ToastContainer />
+            <ToastContainer/>
         </div>
     );
 };

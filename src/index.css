@@ -1,44 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
-@plugin "daisyui";
 
-/* Light theme (default) */
+@plugin "daisyui" {
+  themes: light --default, dark;
+}
+
+/* 1. Define variables for Light Mode */
+:root {
+  --color-primary: #1d4ed8;    /* Strong Blue */
+  --color-secondary: #000066;  /* Deep Navy */
+  --color-accent: #0ea5e9;     /* Sky Blue */
+  --color-base-100: #ffffff;   /* Page Background */
+}
+
+/* 2. Redefine variables for Dark Mode */
+/* This ensures that when the theme is 'dark', the variables change value */
+[data-theme='dark'] {
+  --color-primary: #60a5fa;    /* Lighter, brighter blue */
+  --color-secondary: #94a3b8;  /* Soft slate/silver */
+  --color-accent: #38bdf8;     /* Vibrant cyan */
+  --color-base-100: #121212;   /* Deep charcoal background */
+}
+
+/* 3. Map variables to Tailwind utilities */
+@theme {
+  --font-sans: "Urbanist", sans-serif;
+  
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+}
+
+/* 4. Map variables to DaisyUI components */
 @plugin "daisyui/theme" {
   name: "light";
-  default: true;
-  --color-primary: #1d4ed8;
-  --color-secondary: #000093;
-  --color-accent: #38bdf8; 
-  --color-neutral: #1e293b; 
-
-  --color-base-100: #ffffff;
-  --color-base-200: #f1f5f9;
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-base-100: var(--color-base-100);
 }
 
-/* Dark theme */
 @plugin "daisyui/theme" {
   name: "dark";
-   --color-primary: #1d4ed8;
-  --color-secondary: #0d9488;
-  --color-accent: #38bdf8; 
-  --color-neutral: #1e293b; 
-
-  
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+  --color-base-100: var(--color-base-100);
 }
-
-
-/* @plugin "daisyui/theme" {
-  name: "modernblue";
-  default: false;
-
-  --color-primary: #1d4ed8; blue-700
-  --color-secondary: #0d9488; teal-600
-  --color-accent: #38bdf8; sky-400
-  --color-neutral: #1e293b; 
-
-  --color-base-100: #ffffff;
-  --color-base-200: #f1f5f9;
-}
- */
-
-
-  

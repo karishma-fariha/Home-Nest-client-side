@@ -11,6 +11,11 @@ import Register from "../Pages/Register";
 import Error from "../Pages/Error";
 import PrivateRouter from "../Provider/PrivateRouter";
 import PropertyDetails from "../Pages/PropertyDetails";
+import About from "../Pages/About";
+import ContactUs from "../Pages/ContactUs";
+import DashboardLayout from "../Layouts/DashboardLayout";
+import Dashboard from "../Pages/Dashboard";
+import OurStory from "../Components/OurStory";
 
 const router = createBrowserRouter(
     [
@@ -27,37 +32,30 @@ const router = createBrowserRouter(
                     element: <AllProperties></AllProperties>
                 },
                 {
-                    path: '/addProperties',
-                    element: <PrivateRouter>
-                        <AddProperties></AddProperties>
-                    </PrivateRouter>
+                    path:'/about',
+                    element:<About></About>
                 },
                 {
-                    path: '/myProperties',
-                    element: <PrivateRouter>
-                        <MyProperties></MyProperties>
-                    </PrivateRouter>
+                    path:'/contact',
+                    element:<ContactUs></ContactUs>
                 },
                 {
-                    path: '/myRatings',
-                    element: <PrivateRouter>
-                        <MyRatings></MyRatings>
-                    </PrivateRouter>
-                },
-
+                    path:'/ourStory',
+                    element:<OurStory></OurStory>
+                }
 
             ]
         },
         {
-            path: '/auth',
+            path: '/',
             element: <AuthLayout></AuthLayout>,
             children: [
                 {
-                    path: "/auth/login",
+                    path: "login",
                     element: <Login></Login>
                 },
                 {
-                    path: "/auth/register",
+                    path: "register",
                     element: <Register></Register>
                 },
 
@@ -65,10 +63,34 @@ const router = createBrowserRouter(
         },
         {
             path:'/properties/:id',
-            element:<PrivateRouter>
-                <PropertyDetails></PropertyDetails>
-            </PrivateRouter>
+            element:<PropertyDetails></PropertyDetails>
+           
 
+        },
+        {
+            path:'/',
+            element:<PrivateRouter>
+                <DashboardLayout></DashboardLayout>
+            </PrivateRouter>,
+            children:[
+                {
+                    path:'dashboard',
+                    element:<Dashboard></Dashboard>
+                },
+                {
+                    path:'myProperties',
+                    element:<MyProperties></MyProperties>
+                },
+                {
+                    path:'addProperties',
+                    element:<AddProperties></AddProperties>
+                },
+                {
+                    path:'myRatings',
+                    element:<MyRatings></MyRatings>
+
+                }
+            ]
         },
         {
             path: '/*',

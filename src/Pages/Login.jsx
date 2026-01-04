@@ -1,7 +1,7 @@
 import React, { use, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthContext';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaUserShield } from 'react-icons/fa'; // Added icon for demo
 import { FcGoogle } from 'react-icons/fc';
 import { toast } from 'react-toastify';
 
@@ -18,38 +18,48 @@ const Login = () => {
         navigate("/auth/forget-password");
     }
 
-
     const handleGoogleSignIn = () => {
         googleLogin()
-            .then(result => result.user)
-        navigate(location?.state || '/')
-            .catch(error => {
-                console.log(error)
+            .then(result => {
+                navigate(location?.state || '/');
             })
+            .catch(error => {
+                console.log(error);
+            });
     }
+
+    // --- NEW DEMO LOGIN HANDLER ---
+    const handleDemoLogin = (e) => {
+        e.preventDefault();
+        login("user@gmail.com", "User10")
+            .then(() => {
+                toast.success("Logged in as Demo User");
+                navigate(`${location.state ? location.state : "/"}`);
+            })
+            .catch((error) => {
+                setError(error.code);
+                toast.error(error.code);
+            });
+    }
+
     const handleTogglePasswordShow = (e) => {
         e.preventDefault();
         setShowPass(!showPass);
     }
-
 
     const handleLogin = (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        // console.log(email, password)
         login(email, password)
             .then(() => {
-                // const user = res.user;
-                // console.log(user)
-                navigate(`${location.state ? location.state : "/"}`)
+                navigate(`${location.state ? location.state : "/"}`);
             })
             .catch((error) => {
                 const errorCode = error.code;
-                // const errorMessage = error.message;
-                setError(errorCode)
-                toast(errorCode)
+                setError(errorCode);
+                toast(errorCode);
             });
     }
 
@@ -71,15 +81,15 @@ const Login = () => {
                         <div className="relative">
                             <label className="label">Password</label>
                             <input
-
-                                type={showPass ? 'password' : 'text'}
+                                type={showPass ? 'text' : 'password'} // Fixed: 'text' when showPass is true
                                 className="input"
                                 placeholder="Password"
                                 name='password' required />
                             <button
+                                type="button" // Prevent form submission
                                 onClick={handleTogglePasswordShow}
                                 className='btn btn-xs absolute bottom-1 right-6'>
-                                {showPass ? <FaEyeSlash></FaEyeSlash> : <FaEye size={14} />}
+                                {showPass ? <FaEyeSlash /> : <FaEye size={14} />}
                             </button>
                         </div>
 
@@ -91,18 +101,27 @@ const Login = () => {
                             error && <p className='text-primary'>{error}</p>
                         }
                         <button className="btn btn-primary mt-4 hover:bg-secondary">Login</button>
+                        
                         <button
+                            type="button" // Prevent form submission
                             onClick={handleGoogleSignIn}
-                            className="btn border-2 border-primary mt-4 hover:bg-secondary"><FcGoogle size={24} />
-                            Login With Google</button>
+                            className="btn border-2 border-primary mt-4 hover:bg-secondary">
+                            <FcGoogle size={24} /> Login With Google
+                        </button>
 
+                        {/* --- NEW DEMO LOGIN BUTTON --- */}
+                        <button
+                            type="button"
+                            onClick={handleDemoLogin}
+                            className="btn btn-secondary mt-4 variant-outline">
+                            <FaUserShield size={20} /> Login as Demo User
+                        </button>
 
                         <p className='text-center font-semibold pt-5'>Already Have an Account?<Link className='text-primary' to="/auth/register">Register</Link></p>
                     </fieldset>
                 </form>
             </div>
         </div>
-
     );
 };
 
